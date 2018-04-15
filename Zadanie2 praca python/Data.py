@@ -23,21 +23,16 @@ class Data(object):
         return ret
 
     def AvgCost(self):
-        try:
-            days=0
-            for two_dates in self.dates:
-                beg_date,end_date=SplitToTwoDates(two_dates)
-                d1 = date(GetYear(beg_date), GetMonth(beg_date), GetDay(beg_date))
-                d2 = date(GetYear(end_date), GetMonth(end_date), GetDay(end_date))
-                delta = d2 - d1
-                days+=int(delta.days)
-            if days == 0:
-                return "BRAK"
-            return self.price/days
-        except ValueError:
-            return 'Format daty jest niepoprawny'
-
-
+        days=0
+        for two_dates in self.dates:
+            beg_date,end_date=SplitToTwoDates(two_dates)
+            d1 = date(GetYear(beg_date), GetMonth(beg_date), GetDay(beg_date))
+            d2 = date(GetYear(end_date), GetMonth(end_date), GetDay(end_date))
+            delta = d2 - d1
+            days+=int(delta.days)
+        if days == 0:
+            return "BRAK KOSZTOW"
+        return self.price/days
 
 def InsertFieldToDates(dictionary, key):
     if IsHeaderDate(key) and (dictionary[key] != '-' or len(dictionary[key]) <=3) and dictionary[key] is not None:

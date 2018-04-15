@@ -1,7 +1,6 @@
 import openpyxl
 import datetime
 import Data
-#http://zetcode.com/articles/openpyxl/
 
 def GetWorkbook():
 	file_path = input("Wprowadz lokalizacje pliku\n") 
@@ -59,13 +58,13 @@ def CopyTable(sheet,maxrow=1000,maxcol=1000):
                 table_copy.append(cell.value)
         if flag_found_stm == True and in_data_pos == 0:
             return RetriveHeadersAndData(table_copy,data_length)
-    raise Exception('Nie wszystkie dane zostaly sczytane\nRozwaz zwiekszenie zakresu wyszukiwania danych')
+    print('Nie wszystkie dane zostaly sczytane: zwiekszam zakres wyszukiwan. To moze troche potrwac...')
+    return CopyTable(sheet,maxrow*10,maxcol*10)
  
 def RetriveHeadersAndData(table,headers_length):
     headers=table[:headers_length]
-    #usuwam spacje z prawej strony
     for x in range(len(headers)):
-         headers[x]=headers[x].rstrip()
+         headers[x]=headers[x].rstrip()   #usuwam wszytkie spacje z prawej strony
     data=[]
     i=headers_length
     while i+1< len(table):
@@ -74,12 +73,11 @@ def RetriveHeadersAndData(table,headers_length):
     return headers,data
 
 if __name__=='__main__':
-    if True:
-        wb=GetWorkbook()
-        sheet=PickSheet(wb)
-        headers , data=CopyTable(sheet)
-        dictionary=dict()
-        for x in range(len(data)):
-            dictionary = dict(zip(headers, data[x]))
-            print(Data.Data(dictionary))
-            print(Data.Data(dictionary).AvgCost())
+    wb=GetWorkbook()
+    sheet=PickSheet(wb)
+    headers , data=CopyTable(sheet)
+    dictionary=dict()
+    for x in range(len(data)):
+        dictionary = dict(zip(headers, data[x]))
+        print(Data.Data(dictionary))
+        print(Data.Data(dictionary).AvgCost())
