@@ -77,7 +77,10 @@ if __name__=='__main__':
     sheet=PickSheet(wb)
     headers , data=CopyTable(sheet)
     dictionary=dict()
+    all_data=[]
     for x in range(len(data)):
         dictionary = dict(zip(headers, data[x]))
-        print(Data.Data(dictionary))
-        print(Data.Data(dictionary).AvgCost())
+        all_data.append(Data.Data(dictionary))
+        print(all_data[x])
+        print(all_data[x].AvgCost())
+ 
