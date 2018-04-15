@@ -34,6 +34,8 @@ class Data(object):
             return "BRAK KOSZTOW"
         return self.price/days
 
+
+
 def InsertFieldToDates(dictionary, key):
     if IsHeaderDate(key) and (dictionary[key] != '-' or len(dictionary[key]) <=3) and dictionary[key] is not None:
         return True

@@ -30,9 +30,6 @@
     <Compile Include="Zadanie2_praca_python.py" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="csvFile\" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Zadanie praca.xlsx" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
