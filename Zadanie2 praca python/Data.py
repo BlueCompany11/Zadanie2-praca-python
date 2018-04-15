@@ -1,4 +1,5 @@
 from datetime import date
+from re import sub
 
 class Data(object):
     """description of class"""
@@ -6,7 +7,7 @@ class Data(object):
         #['Nazwa', 'ID', 'Cena', 'Pozycja', 'Poziom', 'Opis', 'Nr Zamówienia']
         self.name=dictionary['Nazwa']
         self.id=dictionary['ID']
-        self.price=dictionary['Cena']
+        self.price=GetPrice(dictionary['Cena'])
         self.rank=dictionary['Pozycja']
         self.level=dictionary['Poziom']
         self.description=dictionary['Opis']
@@ -32,9 +33,24 @@ class Data(object):
             days+=int(delta.days)
         if days == 0:
             return "BRAK KOSZTOW"
-        return self.price/days
+        try:
+            ret=self.price/days
+        except TypeError:
+            return "BLAD W TRAKCIE OBLICZEN - SPRAWDZ WARTOSC CENA"
+        return ret
 
+def GetPrice(field):
+    try:
+        return float(field)
+    except Exception:
+        field=field.replace(',','.')
+        field=''.join(i for i in field if RestrictionsToBePrice(i))
+        return float(field)
 
+def RestrictionsToBePrice(field):
+    if field.isdigit() or str(field)=='.':
+        return True
+    return False
 
 def InsertFieldToDates(dictionary, key):
     if IsHeaderDate(key) and (dictionary[key] != '-' or len(dictionary[key]) <=3) and dictionary[key] is not None:
