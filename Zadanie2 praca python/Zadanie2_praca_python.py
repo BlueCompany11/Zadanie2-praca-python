@@ -3,9 +3,9 @@ import datetime
 import Data
 
 def GetWorkbook():
-	file_path = input("Wprowadz lokalizacje pliku\n") 
+	file_path = input("Wprowadz lokalizacje pliku\n")
 	if file_path == "":
-		file_path='C:\\Users\\BlueCompany\\Desktop\\Zadanie praca.xlsx'
+		file_path='Zadanie praca.xlsx'
 		print('Wybrano domyslna sciezke: ',end=file_path+'\n')
 	try:
 		wb = openpyxl.load_workbook(filename = file_path,data_only=True)
