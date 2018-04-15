@@ -58,30 +58,27 @@ def IsHeaderDate(field):
     return True
 
 
-def IfStringLooksLikeDate(date):
-	try:
-		if not 0<GetDay(date)<=31:
-			return False
-		if not 0<GetMonth(date)<=12:
-			return False
-		if not 1900<=GetYear(date):
-			return False
-		if not date[3] == '.' and date[6] == '.':
-			return False
-	except ValueError:
-		return False
-	return True
+def IfStringLooksLikeDate(mydate):
+    if len(mydate)<10:
+        return False
+    try:
+        if  mydate[2] != '.' or mydate[5] != '.':
+            return False
+        d = date(GetYear(mydate), GetMonth(mydate), GetDay(mydate))
+    except ValueError:
+        return False
+    return True
 
-def GetDay(date):
-    return int(date[:2])
+def GetDay(mydate):
+    return int(mydate[:2])
 
-def GetMonth(date):
-    return int(date[3:5])
+def GetMonth(mydate):
+    return int(mydate[3:5])
 
-def GetYear(date):
-    return int(date[6:])
+def GetYear(mydate):
+    return int(mydate[6:])
 
-def SplitToTwoDates(date):
-    first_date=date[:len('01.01.2017')]
-    second_date=date[len('01.01.2017-'):]
+def SplitToTwoDates(mydate):
+    first_date=mydate[:len('01.01.2017')]
+    second_date=mydate[len('01.01.2017-'):]
     return first_date, second_date
