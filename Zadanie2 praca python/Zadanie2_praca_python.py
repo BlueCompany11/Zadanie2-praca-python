@@ -59,6 +59,8 @@ def CopyTable(sheet,maxrow=1000,maxcol=1000):
         if flag_found_stm == True and in_data_pos == 0:
             return RetriveHeadersAndData(table_copy,data_length)
     print('Nie wszystkie dane zostaly sczytane: zwiekszam zakres wyszukiwan. To moze troche potrwac...')
+    if maxrow == 1000000 and maxcol == 1000000:
+        raise Exception("W podany plik jest pusty")
     return CopyTable(sheet,maxrow*10,maxcol*10)
  
 def RetriveHeadersAndData(table,headers_length):
